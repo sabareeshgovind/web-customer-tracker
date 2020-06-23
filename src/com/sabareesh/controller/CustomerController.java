@@ -11,15 +11,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sabareesh.dao.CustomerDAO;
 import com.sabareesh.hibernate.entity.Customer;
+import com.sabareesh.service.CustomerService;
 
 @Controller
 @RequestMapping("/customer")
 public class CustomerController {
 	
 	//inject customer DAO
+	/*
 	@Autowired
 	private CustomerDAO customerDAO;
+	*/
 	
+	//inject service layer
+	@Autowired
+	private CustomerService service;
 	
 	
 	
@@ -31,7 +37,7 @@ public class CustomerController {
 		
 		//Get customers from DAO method
 		try {
-			List <Customer> theCustomers =  customerDAO.getCustomers();
+			List <Customer> theCustomers =  service.getCustomers();
 			model.addAttribute("customers", theCustomers);
 		} catch (Exception e) {
 			System.out.println(e);

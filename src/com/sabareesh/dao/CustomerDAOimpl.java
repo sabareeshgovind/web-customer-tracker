@@ -20,7 +20,7 @@ public class CustomerDAOimpl implements CustomerDAO {
 	private SessionFactory sessionFactory;
 
 	@Override
-	@Transactional
+	//@Transactional - moved to service layer
 	public List<Customer> getCustomers() {
 		
 		//get a session 
