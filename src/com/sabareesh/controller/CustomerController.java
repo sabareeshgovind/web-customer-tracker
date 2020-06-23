@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -42,12 +43,28 @@ public class CustomerController {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-//		List <Customer> theCustomers =  customerDAO.getCustomers();
-//		model.addAttribute("customers", theCustomers);
 		return "list-customers";
 		
 	}
 	
+	@RequestMapping("/showFormForAdd")
+	public String showFormForAdd(Model model) {
+		
+		Customer customer = new Customer();
+		model.addAttribute("customer", customer);
+		return "customer-form";
+		
+	}
+	
+	@RequestMapping("/saveCustomer")
+	public String saveCustomer(@ModelAttribute("customer") Customer customer) {
+		
+		service.saveCustomer(customer);
+		
+		
+		return "redirect:/customer/list";
+		
+	}
 	
 
 }

@@ -22,6 +22,15 @@ public class CustomerServiceImpl implements CustomerService {
 		// TODO Auto-generated method stub
 		return customerDAO.getCustomers(); //delegate method from DAO layer.
 	}
+
+
+	@Transactional
+	@Override
+	public void saveCustomer(Customer customer) {
+		
+		customerDAO.saveCustomer(customer);
+		
+	}
 	
 	
 
