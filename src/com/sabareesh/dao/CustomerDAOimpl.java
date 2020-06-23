@@ -27,7 +27,7 @@ public class CustomerDAOimpl implements CustomerDAO {
 		Session session = sessionFactory.getCurrentSession();
 		
 		//create a query 
-		Query<Customer> theQuery = session.createQuery("from Customer", Customer.class);
+		Query<Customer> theQuery = session.createQuery("from Customer order by lastName", Customer.class);
 		
 		//get result set 
 		List<Customer> customers = theQuery.getResultList();
@@ -43,7 +43,18 @@ public class CustomerDAOimpl implements CustomerDAO {
 		Session session = sessionFactory.getCurrentSession();
 		
 		//save object 
-		session.save(customer);
+		session.saveOrUpdate(customer);//Does update based on id.
+	}
+
+	@Override
+	public Customer getCustomer(int id) {
+		
+		//get a session 
+		Session session = sessionFactory.getCurrentSession();
+		
+		Customer customer= session.get(Customer.class,id);
+		
+		return customer;
 	}
 
 }

@@ -31,6 +31,14 @@ public class CustomerServiceImpl implements CustomerService {
 		customerDAO.saveCustomer(customer);
 		
 	}
+
+
+	@Transactional
+	@Override
+	public Customer getCustomer(int id) {
+		// TODO Auto-generated method stub
+		return customerDAO.getCustomer(id);
+	}
 	
 	
 

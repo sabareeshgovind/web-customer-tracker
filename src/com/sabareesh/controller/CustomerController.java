@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sabareesh.dao.CustomerDAO;
 import com.sabareesh.hibernate.entity.Customer;
@@ -60,9 +61,20 @@ public class CustomerController {
 	public String saveCustomer(@ModelAttribute("customer") Customer customer) {
 		
 		service.saveCustomer(customer);
-		
-		
 		return "redirect:/customer/list";
+	}
+	
+	//update 
+	//can use @GetMapping also
+	@RequestMapping("/showFormForUpdate")
+	public String showFormForUpdate(@RequestParam("customerId") int Id, Model model) {
+		
+		
+		Customer customer = service.getCustomer(Id);
+		
+		model.addAttribute("customer",customer);
+		
+		return "customer-form";
 		
 	}
 	
